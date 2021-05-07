@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="giulianoovendedorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="fabricante">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="imagens">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="arquivo" Type="nvarchar" MaxLength="150" />
+          <Property Name="destaque" Type="bit" />
+          <Property Name="veiculo_id" Type="int" />
+        </EntityType>
+        <EntityType Name="modelo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="nvarchar" MaxLength="150" />
+          <Property Name="fabricante_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tipos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="veiculos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titulo" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="modelo_id" Type="int" Nullable="false" />
+          <Property Name="ano" Type="nvarchar" MaxLength="50" />
+          <Property Name="cor" Type="nvarchar" MaxLength="50" />
+          <Property Name="km" Type="int" />
+          <Property Name="preco" Type="money" />
+          <Property Name="ativo" Type="bit" Nullable="false" />
+          <Property Name="data_criacao" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="destaque" Type="bit" />
+          <Property Name="descricao" Type="nvarchar(max)" />
+          <Property Name="tipo_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_imagens_veiculos">
+          <End Role="veiculos" Type="Self.veiculos" Multiplicity="0..1" />
+          <End Role="imagens" Type="Self.imagens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="veiculos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="imagens">
+              <PropertyRef Name="veiculo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_modelo_fabricante">
+          <End Role="fabricante" Type="Self.fabricante" Multiplicity="0..1" />
+          <End Role="modelo" Type="Self.modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fabricante">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="modelo">
+              <PropertyRef Name="fabricante_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_veiculos_modelo">
+          <End Role="modelo" Type="Self.modelo" Multiplicity="1" />
+          <End Role="veiculos" Type="Self.veiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modelo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="veiculos">
+              <PropertyRef Name="modelo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_veiculos_tipos">
+          <End Role="tipos" Type="Self.tipos" Multiplicity="0..1" />
+          <End Role="veiculos" Type="Self.veiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="veiculos">
+              <PropertyRef Name="tipo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="giulianoovendedorModelStoreContainer">
+          <EntitySet Name="fabricante" EntityType="Self.fabricante" Schema="giulianoovendedor" store:Type="Tables" />
+          <EntitySet Name="imagens" EntityType="Self.imagens" Schema="giulianoovendedor" store:Type="Tables" />
+          <EntitySet Name="modelo" EntityType="Self.modelo" Schema="giulianoovendedor" store:Type="Tables" />
+          <EntitySet Name="tipos" EntityType="Self.tipos" Schema="giulianoovendedor" store:Type="Tables" />
+          <EntitySet Name="veiculos" EntityType="Self.veiculos" Schema="giulianoovendedor" store:Type="Tables" />
+          <AssociationSet Name="FK_imagens_veiculos" Association="Self.FK_imagens_veiculos">
+            <End Role="veiculos" EntitySet="veiculos" />
+            <End Role="imagens" EntitySet="imagens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_modelo_fabricante" Association="Self.FK_modelo_fabricante">
+            <End Role="fabricante" EntitySet="fabricante" />
+            <End Role="modelo" EntitySet="modelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_veiculos_modelo" Association="Self.FK_veiculos_modelo">
+            <End Role="modelo" EntitySet="modelo" />
+            <End Role="veiculos" EntitySet="veiculos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_veiculos_tipos" Association="Self.FK_veiculos_tipos">
+            <End Role="tipos" EntitySet="tipos" />
+            <End Role="veiculos" EntitySet="veiculos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="giulianoovendedorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="giulianoovendedorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="fabricante" EntityType="giulianoovendedorModel.fabricante" />
+          <EntitySet Name="imagens" EntityType="giulianoovendedorModel.imagens" />
+          <EntitySet Name="modelo" EntityType="giulianoovendedorModel.modelo" />
+          <AssociationSet Name="FK_modelo_fabricante" Association="giulianoovendedorModel.FK_modelo_fabricante">
+            <End Role="fabricante" EntitySet="fabricante" />
+            <End Role="modelo" EntitySet="modelo" />
+          </AssociationSet>
+          <EntitySet Name="tipos" EntityType="giulianoovendedorModel.tipos" />
+          <EntitySet Name="veiculos" EntityType="giulianoovendedorModel.veiculos" />
+          <AssociationSet Name="FK_imagens_veiculos" Association="giulianoovendedorModel.FK_imagens_veiculos">
+            <End Role="veiculos" EntitySet="veiculos" />
+            <End Role="imagens" EntitySet="imagens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_veiculos_modelo" Association="giulianoovendedorModel.FK_veiculos_modelo">
+            <End Role="modelo" EntitySet="modelo" />
+            <End Role="veiculos" EntitySet="veiculos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_veiculos_tipos" Association="giulianoovendedorModel.FK_veiculos_tipos">
+            <End Role="tipos" EntitySet="tipos" />
+            <End Role="veiculos" EntitySet="veiculos" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="fabricante">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="modelo" Relationship="giulianoovendedorModel.FK_modelo_fabricante" FromRole="fabricante" ToRole="modelo" />
+        </EntityType>
+        <EntityType Name="imagens">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="arquivo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="destaque" Type="Boolean" />
+          <Property Name="veiculo_id" Type="Int32" />
+          <NavigationProperty Name="veiculos" Relationship="giulianoovendedorModel.FK_imagens_veiculos" FromRole="imagens" ToRole="veiculos" />
+        </EntityType>
+        <EntityType Name="modelo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="fabricante_id" Type="Int32" />
+          <NavigationProperty Name="fabricante" Relationship="giulianoovendedorModel.FK_modelo_fabricante" FromRole="modelo" ToRole="fabricante" />
+          <NavigationProperty Name="veiculos" Relationship="giulianoovendedorModel.FK_veiculos_modelo" FromRole="modelo" ToRole="veiculos" />
+        </EntityType>
+        <Association Name="FK_modelo_fabricante">
+          <End Type="giulianoovendedorModel.fabricante" Role="fabricante" Multiplicity="0..1" />
+          <End Type="giulianoovendedorModel.modelo" Role="modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fabricante">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="modelo">
+              <PropertyRef Name="fabricante_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tipos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="veiculos" Relationship="giulianoovendedorModel.FK_veiculos_tipos" FromRole="tipos" ToRole="veiculos" />
+        </EntityType>
+        <EntityType Name="veiculos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titulo" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="modelo_id" Type="Int32" Nullable="false" />
+          <Property Name="ano" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="km" Type="Int32" />
+          <Property Name="preco" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <Property Name="data_criacao" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="destaque" Type="Boolean" />
+          <Property Name="descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tipo_id" Type="Int32" />
+          <NavigationProperty Name="imagens" Relationship="giulianoovendedorModel.FK_imagens_veiculos" FromRole="veiculos" ToRole="imagens" />
+          <NavigationProperty Name="modelo" Relationship="giulianoovendedorModel.FK_veiculos_modelo" FromRole="veiculos" ToRole="modelo" />
+          <NavigationProperty Name="tipos" Relationship="giulianoovendedorModel.FK_veiculos_tipos" FromRole="veiculos" ToRole="tipos" />
+        </EntityType>
+        <Association Name="FK_imagens_veiculos">
+          <End Type="giulianoovendedorModel.veiculos" Role="veiculos" Multiplicity="0..1" />
+          <End Type="giulianoovendedorModel.imagens" Role="imagens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="veiculos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="imagens">
+              <PropertyRef Name="veiculo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_veiculos_modelo">
+          <End Type="giulianoovendedorModel.modelo" Role="modelo" Multiplicity="1" />
+          <End Type="giulianoovendedorModel.veiculos" Role="veiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modelo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="veiculos">
+              <PropertyRef Name="modelo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_veiculos_tipos">
+          <End Type="giulianoovendedorModel.tipos" Role="tipos" Multiplicity="0..1" />
+          <End Type="giulianoovendedorModel.veiculos" Role="veiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="veiculos">
+              <PropertyRef Name="tipo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="giulianoovendedorModelStoreContainer" CdmEntityContainer="giulianoovendedorEntities">
+          <EntitySetMapping Name="fabricante">
+            <EntityTypeMapping TypeName="giulianoovendedorModel.fabricante">
+              <MappingFragment StoreEntitySet="fabricante">
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imagens">
+            <EntityTypeMapping TypeName="giulianoovendedorModel.imagens">
+              <MappingFragment StoreEntitySet="imagens">
+                <ScalarProperty Name="veiculo_id" ColumnName="veiculo_id" />
+                <ScalarProperty Name="destaque" ColumnName="destaque" />
+                <ScalarProperty Name="arquivo" ColumnName="arquivo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="modelo">
+            <EntityTypeMapping TypeName="giulianoovendedorModel.modelo">
+              <MappingFragment StoreEntitySet="modelo">
+                <ScalarProperty Name="fabricante_id" ColumnName="fabricante_id" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipos">
+            <EntityTypeMapping TypeName="giulianoovendedorModel.tipos">
+              <MappingFragment StoreEntitySet="tipos">
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="veiculos">
+            <EntityTypeMapping TypeName="giulianoovendedorModel.veiculos">
+              <MappingFragment StoreEntitySet="veiculos">
+                <ScalarProperty Name="tipo_id" ColumnName="tipo_id" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="destaque" ColumnName="destaque" />
+                <ScalarProperty Name="data_criacao" ColumnName="data_criacao" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="preco" ColumnName="preco" />
+                <ScalarProperty Name="km" ColumnName="km" />
+                <ScalarProperty Name="cor" ColumnName="cor" />
+                <ScalarProperty Name="ano" ColumnName="ano" />
+                <ScalarProperty Name="modelo_id" ColumnName="modelo_id" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
