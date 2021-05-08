@@ -21,27 +21,17 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <asp:Label AssociatedControlID="ddlFabricante" Text="Marca:" runat="server" />
-                                        <asp:DropDownList
-                                            runat="server"
-                                            CssClass="form-control"
-                                            ID="ddlFabricante"
-                                            OnDataBound="ddlFabricante_DataBound"
-                                            DataTextField="descricao"
-                                            DataValueField="id"
-                                            AutoPostBack="true"
+                                        <asp:DropDownList runat="server" CssClass="form-control" ID="ddlFabricante"
+                                            OnDataBound="ddlFabricante_DataBound" DataTextField="descricao"
+                                            DataValueField="id" AutoPostBack="true"
                                             OnSelectedIndexChanged="ddlFabricante_SelectedIndexChanged">
                                         </asp:DropDownList>
                                     </div>
                                     <div class="col-md-12">
                                         <asp:Label AssociatedControlID="ddlModelo" Text="Modelo" runat="server" />
-                                        <asp:DropDownList 
-                                            runat="server" 
-                                            CssClass="form-control" 
-                                            ID="ddlModelo" 
-                                            DataTextField="descricao" 
-                                            DataValueField="id"
-                                            OnDataBound="ddlModelo_DataBound" 
-                                            Enabled="false">
+                                        <asp:DropDownList runat="server" CssClass="form-control" ID="ddlModelo"
+                                            DataTextField="descricao" DataValueField="id"
+                                            OnDataBound="ddlModelo_DataBound" Enabled="false">
                                         </asp:DropDownList>
                                     </div>
                             </ContentTemplate>
@@ -67,29 +57,34 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <asp:Label runat="server" AssociatedControlID="txtAnoInicial">Ano de:</asp:Label>
-                        <asp:TextBox ClientIDMode="Static" ID="txtAnoInicial" runat="server" CssClass="form-control" MaxLength="4" />
+                        <asp:TextBox ClientIDMode="Static" ID="txtAnoInicial" runat="server" CssClass="form-control"
+                            MaxLength="4" />
                     </div>
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <asp:Label runat="server" AssociatedControlID="txtAnoAte">Ano até:</asp:Label>
-                        <asp:TextBox ClientIDMode="Static" ID="txtAnoAte" runat="server" CssClass="form-control" MaxLength="4" />
+                        <asp:TextBox ClientIDMode="Static" ID="txtAnoAte" runat="server" CssClass="form-control"
+                            MaxLength="4" />
                     </div>
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <asp:Label runat="server" AssociatedControlID="txtAnoAte">Tipo:</asp:Label>
-                        <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-control"
-                            DataSourceID="SQLDSTipos" DataTextField="descricao" DataValueField="id" OnDataBound="ddlTipo_DataBound">
+                        <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-control" DataSourceID="SQLDSTipos"
+                            DataTextField="descricao" DataValueField="id" OnDataBound="ddlTipo_DataBound">
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="SQLDSTipos" runat="server"
                             ConnectionString="<%$ ConnectionStrings:giulianoovendedorConnectionString2 %>"
-                            SelectCommand="SELECT * FROM [giulianoovendedor].[giulianoovendedor].[tipos] ORDER BY [descricao]"></asp:SqlDataSource>
+                            SelectCommand="SELECT * FROM [giulianoovendedor].[giulianoovendedor].[tipos] ORDER BY [descricao]">
+                        </asp:SqlDataSource>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <asp:Label runat="server" AssociatedControlID="lbBuscar">.</asp:Label>
-                        <asp:LinkButton ID="lbBuscar" runat="server" OnClick="lbBuscar_Click" CssClass="btn btn-success" CausesValidation="false">
+                        <asp:LinkButton ID="lbBuscar" runat="server" OnClick="lbBuscar_Click" CssClass="btn btn-success"
+                            CausesValidation="false">
                             <i class="fa fa-search"></i> Buscar
                         </asp:LinkButton>
-                        <asp:LinkButton ID="lbReiniciar" runat="server" OnClick="lbReiniciar_Click" CssClass="btn btn-warning" CausesValidation="false">
+                        <asp:LinkButton ID="lbReiniciar" runat="server" OnClick="lbReiniciar_Click"
+                            CssClass="btn btn-warning" CausesValidation="false">
                             <i class="fa fa-repeat"></i> Reiniciar
                         </asp:LinkButton>
                     </div>
@@ -118,35 +113,46 @@
                         <ItemTemplate>
                             <div class="col-lg-3 col-md-3 mb-3">
                                 <div class="card h-100 text-center">
-                                    <asp:HyperLink NavigateUrl='<%# "~/VerDetalhes.aspx?id=" + Eval("codigo") %>' runat="server">
-                                        <asp:Image CssClass="card-img-top" ImageUrl='<%# "http://www.giulianoovendedor.com.br/fotos/" + Eval("arquivo") %>' runat="server" AlternateText='<%# "Foto " + Eval("codigo") + " " + Eval("arquivo") %>' />
+                                    <asp:HyperLink NavigateUrl='<%# "~/VerDetalhes.aspx?id=" + Eval("codigo") %>'
+                                        runat="server">
+                                        <asp:Image CssClass="card-img-top"
+                                            ImageUrl='<%# "http://www.giulianoovendedor.com.br/fotos/" + Eval("arquivo") %>'
+                                            runat="server"
+                                            AlternateText='<%# "Foto " + Eval("codigo") + " " + Eval("arquivo") %>' />
                                     </asp:HyperLink>
                                     <div class="card-body">
-                                        <h3 class="card-title" style="font-size: 18px !important; font-weight: bold !important">
-                                            <asp:HyperLink NavigateUrl='<%# "~/VerDetalhes.aspx?id=" + Eval("codigo") %>' runat="server">
-                                                <asp:Label ID="tituloLabel" runat="server" Text='<%# Eval("titulo") %>' />
+                                        <h3 class="card-title"
+                                            style="font-size: 18px !important; font-weight: bold !important">
+                                            <asp:HyperLink
+                                                NavigateUrl='<%# "~/VerDetalhes.aspx?id=" + Eval("codigo") %>'
+                                                runat="server">
+                                                <asp:Label ID="tituloLabel" runat="server"
+                                                    Text='<%# Eval("titulo") %>' />
                                             </asp:HyperLink>
                                         </h3>
                                         <div class="product-price-col">
                                             <div class="price-container-desktop">
                                                 <h4 class="label-col">Preço:
-                                                <asp:Label ID="Label2" runat="server" Text='<%# Convert.ToDecimal(Eval("preco")).ToString("R$ #,###.00") %>' /></h4>
+                                                    <asp:Label ID="Label2" runat="server"
+                                                        Text='<%# Convert.ToDecimal(Eval("preco")).ToString("R$ #,###.00") %>' />
+                                                </h4>
                                             </div>
                                         </div>
-                                        <h4 class="label-col">Km: 
-                                    <b class="product-price-col">
-                                        <asp:Label ID="kmLabel" runat="server" Text='<%# Eval("km") == DBNull.Value || string.IsNullOrWhiteSpace(Convert.ToString(Eval("km"))) ? "N/I" : Convert.ToDecimal(Eval("km")).ToString("#.###") %>' />
-                                    </b>
+                                        <h4 class="label-col">Km:
+                                            <b class="product-price-col">
+                                                <asp:Label ID="kmLabel" runat="server"
+                                                    Text='<%# Eval("km") == DBNull.Value || string.IsNullOrWhiteSpace(Convert.ToString(Eval("km"))) ? "N/I" : Convert.ToDecimal(Eval("km")).ToString("#.###") %>' />
+                                            </b>
                                         </h4>
                                         <h4 class="label-col">Cor:
-                                        <b class="product-price-col">
-                                            <asp:Label ID="corLbl" runat="server" Text='<%# Eval("cor") %>' />
-                                        </b>
+                                            <b class="product-price-col">
+                                                <asp:Label ID="corLbl" runat="server" Text='<%# Eval("cor") %>' />
+                                            </b>
                                         </h4>
                                         <h4 class="label-col">Ano:
-                                        <b class="product-price-col">
-                                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("ano") %>' />
-                                        </b>
+                                            <b class="product-price-col">
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("ano") %>' />
+                                            </b>
                                         </h4>
                                     </div>
                                 </div>
@@ -160,9 +166,17 @@
                                             <asp:TemplatePagerField>
                                                 <PagerTemplate>Página </PagerTemplate>
                                             </asp:TemplatePagerField>
-                                            <asp:NextPreviousPagerField ButtonCssClass="btn btn-info" ButtonType="Button" ShowFirstPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" FirstPageText="Primeira" LastPageText="Última" NextPageText="Próxima" PreviousPageText="Anterior" />
+                                            <asp:NextPreviousPagerField ButtonCssClass="btn btn-info"
+                                                ButtonType="Button" ShowFirstPageButton="True"
+                                                ShowNextPageButton="False" ShowPreviousPageButton="False"
+                                                FirstPageText="Primeira" LastPageText="Última" NextPageText="Próxima"
+                                                PreviousPageText="Anterior" />
                                             <asp:NumericPagerField ButtonCount="90" />
-                                            <asp:NextPreviousPagerField ButtonCssClass="btn btn-info" ButtonType="Button" ShowLastPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" FirstPageText="Primeira" LastPageText="Última" NextPageText="Próxima" PreviousPageText="Anterior" />
+                                            <asp:NextPreviousPagerField ButtonCssClass="btn btn-info"
+                                                ButtonType="Button" ShowLastPageButton="True" ShowNextPageButton="False"
+                                                ShowPreviousPageButton="False" FirstPageText="Primeira"
+                                                LastPageText="Última" NextPageText="Próxima"
+                                                PreviousPageText="Anterior" />
                                         </Fields>
                                     </asp:DataPager>
                                 </div>
@@ -182,9 +196,17 @@
                                             <asp:TemplatePagerField>
                                                 <PagerTemplate>Página </PagerTemplate>
                                             </asp:TemplatePagerField>
-                                            <asp:NextPreviousPagerField ButtonCssClass="btn btn-info" ButtonType="Button" ShowFirstPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" FirstPageText="Primeira" LastPageText="Última" NextPageText="Próxima" PreviousPageText="Anterior" />
+                                            <asp:NextPreviousPagerField ButtonCssClass="btn btn-info"
+                                                ButtonType="Button" ShowFirstPageButton="True"
+                                                ShowNextPageButton="False" ShowPreviousPageButton="False"
+                                                FirstPageText="Primeira" LastPageText="Última" NextPageText="Próxima"
+                                                PreviousPageText="Anterior" />
                                             <asp:NumericPagerField ButtonCount="90" />
-                                            <asp:NextPreviousPagerField ButtonCssClass="btn btn-info" ButtonType="Button" ShowLastPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" FirstPageText="Primeira" LastPageText="Última" NextPageText="Próxima" PreviousPageText="Anterior" />
+                                            <asp:NextPreviousPagerField ButtonCssClass="btn btn-info"
+                                                ButtonType="Button" ShowLastPageButton="True" ShowNextPageButton="False"
+                                                ShowPreviousPageButton="False" FirstPageText="Primeira"
+                                                LastPageText="Última" NextPageText="Próxima"
+                                                PreviousPageText="Anterior" />
                                         </Fields>
                                     </asp:DataPager>
                                 </div>
@@ -208,4 +230,3 @@
         })
     </script>
 </asp:Content>
-
