@@ -3,8 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="cpCabecalho" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cpConteudo" runat="Server">
-    <asp:UpdatePanel ID="upVeiculo" runat="server" UpdateMode="Always">
-        <ContentTemplate>
+   <%-- <asp:UpdatePanel ID="upVeiculo" runat="server" UpdateMode="Always">
+        <ContentTemplate>--%>
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="text-center"><i class="fa fa-car"></i>ENCONTRE SEU CARRO</h3>
@@ -16,7 +16,7 @@
                         <legend>
                             <h5>Filtros</h5>
                         </legend>
-                        <asp:UpdatePanel runat="server">
+                        <asp:UpdatePanel runat="server" UpdateMode="Always" ChildrenAsTriggers="true">
                             <ContentTemplate>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -72,8 +72,7 @@
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="SQLDSTipos" runat="server"
                             ConnectionString="<%$ ConnectionStrings:giulianoovendedorConnectionString2 %>"
-                            SelectCommand="SELECT * FROM [giulianoovendedor].[giulianoovendedor].[tipos] ORDER BY [descricao]">
-                        </asp:SqlDataSource>
+                            SelectCommand="SELECT * FROM [giulianoovendedor].[giulianoovendedor].[tipos] ORDER BY [descricao]"></asp:SqlDataSource>
                     </div>
                 </div>
                 <div class="row">
@@ -94,7 +93,7 @@
             <div class="col-md-9">
                 <hr class="dropdown-divider" style="margin: 17px auto" />
                 <div class="row" id="#busca">
-                    <asp:ListView ID="lvVeiculos" runat="server" GroupItemCount="4">
+                    <asp:ListView ID="lvVeiculos" runat="server" GroupItemCount="4" OnPagePropertiesChanging="lvVeiculos_PagePropertiesChanging">
                         <EmptyDataTemplate>
                             <table runat="server" style="">
                                 <tr>
@@ -161,7 +160,7 @@
                         <LayoutTemplate>
                             <div class="row">
                                 <div class="col-md-12" style="margin: 20px auto">
-                                    <asp:DataPager ID="DataPager2" runat="server" PageSize="24">
+                                    <asp:DataPager ID="lvVeiculosDataPage" runat="server" PageSize="24">
                                         <Fields>
                                             <asp:TemplatePagerField>
                                                 <PagerTemplate>Página </PagerTemplate>
@@ -215,13 +214,13 @@
                     </asp:ListView>
                 </div>
             </div>
-        </ContentTemplate>
+        <%--</ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="ddlFabricante" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="ddlModelo" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="ddlFaixaPreco" EventName="SelectedIndexChanged" />
         </Triggers>
-    </asp:UpdatePanel>
+    </asp:UpdatePanel>--%>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cpRodape" runat="Server">
     <script>

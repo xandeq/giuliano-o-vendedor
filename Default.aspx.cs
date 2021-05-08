@@ -214,4 +214,18 @@ public partial class _Default : System.Web.UI.Page
             throw;
         }
     }
+
+    protected void lvVeiculos_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+    {
+        try
+        {
+            DataPager dp = (DataPager)lvVeiculos.FindControl("lvVeiculosDataPage");
+            dp.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            CarregarVeiculos();
+        }
+        catch (Exception ex)
+        {
+            
+        }
+    }
 }
